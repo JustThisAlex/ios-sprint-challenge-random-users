@@ -16,9 +16,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="UFk-xE-yM3">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Order:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnf-3W-T0O">
+                                    <rect key="frame" x="15" y="11.5" width="99" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Pg4-Cf-DHC">
+                                    <rect key="frame" x="129" y="6.5" width="231" height="32"/>
+                                    <segments>
+                                        <segment title="FN LN"/>
+                                        <segment title="LN, FN"/>
+                                    </segments>
+                                    <connections>
+                                        <action selector="segmentChanged:" destination="EqL-i4-UjA" eventType="valueChanged" id="F41-Nu-hi7"/>
+                                    </connections>
+                                </segmentedControl>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <constraints>
+                                <constraint firstItem="vnf-3W-T0O" firstAttribute="centerY" secondItem="UFk-xE-yM3" secondAttribute="centerY" id="9uc-Us-f6S"/>
+                                <constraint firstAttribute="trailing" secondItem="Pg4-Cf-DHC" secondAttribute="trailing" constant="15" id="FaO-bM-Vk6"/>
+                                <constraint firstItem="Pg4-Cf-DHC" firstAttribute="centerY" secondItem="UFk-xE-yM3" secondAttribute="centerY" id="KgD-zf-rk2"/>
+                                <constraint firstItem="Pg4-Cf-DHC" firstAttribute="leading" secondItem="vnf-3W-T0O" secondAttribute="trailing" constant="15" id="hrX-Wt-jPA"/>
+                                <constraint firstItem="vnf-3W-T0O" firstAttribute="leading" secondItem="UFk-xE-yM3" secondAttribute="leading" constant="15" id="t3e-iY-Uyv"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" textLabel="mrp-Y7-yhi" style="IBUITableViewCellStyleDefault" id="nvK-if-58S" customClass="UserTableViewCell" customModule="Random_Users" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nvK-if-58S" id="cXP-ng-6py">
                                     <rect key="frame" x="0.0" y="0.0" width="348" height="43.5"/>
@@ -44,6 +74,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Thm-5X-goZ"/>
+                    <connections>
+                        <outlet property="segment" destination="Pg4-Cf-DHC" id="D6v-VZ-gDz"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y04-ZU-bCt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

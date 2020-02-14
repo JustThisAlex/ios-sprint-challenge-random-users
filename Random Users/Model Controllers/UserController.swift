@@ -14,6 +14,7 @@ class UserController {
     static let shared = UserController()
     var baseURL = URL(string: "https://randomuser.me/api/?format=json&inc=name,email,phone,picture&results=1000")!
     var users = [User]()
+    var lnFirst = false
     
     // MARK: - Methods
     func get(completion: @escaping (Error?) -> ()) {

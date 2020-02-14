@@ -10,6 +10,9 @@ import UIKit
 
 class UserTableViewController: UITableViewController {
     
+    // MARK: - IBOutlets
+    @IBOutlet weak var segment: UISegmentedControl!
+    
     // MARK: - Properties
     let userController = UserController.shared
     var users = [User]()
@@ -30,6 +33,13 @@ class UserTableViewController: UITableViewController {
             } }
     }
     
+    // MARK: - IBActions
+    @IBAction func segmentChanged(_ sender: UISegmentedControl) {
+        if segment.selectedSegmentIndex == 0 { userController.lnFirst = false }
+        else { userController.lnFirst = true }
+        tableView.reloadData()
+    }
+    
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
@@ -38,7 +48,7 @@ class UserTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! UserTableViewCell
         let user = users[indexPath.row]
-        cell.textLabel?.text = "\(user.title) \(user.firstName) \(user.lastName)"
+        cell.textLabel?.text = userController.lnFirst ? "\(user.title) \(user.lastName), \(user.firstName)" : "\(user.title) \(user.firstName) \(user.lastName)"
         cell.thCache = thCache
         cell.thumbnail = user.thumbnail
         cell.parent = self
@@ -50,12 +60,13 @@ class UserTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DetailSegue",  let index = tableView.indexPathForSelectedRow?.row {
             let destination = segue.destination as! UserDetailViewController
-            destination.name = "\(users[index].title) \(users[index].firstName) \(users[index].lastName)"
-            destination.imageURL = users[index].image
-            destination.mail = users[index].email
+            let user = users[index]
+            destination.name = userController.lnFirst ? "\(user.title) \(user.lastName), \(user.firstName)" : "\(user.title) \(user.firstName) \(user.lastName)"
+            destination.imageURL = user.image
+            destination.mail = user.email
             destination.imgCache = imgCache
             destination.index = index
-            destination.phone = users[index].phone
+            destination.phone = user.phone
         }
     }
     
